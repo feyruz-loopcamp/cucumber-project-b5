@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
                   "json:target/json-reports/json-report.json"},
         features = "src/test/resources/features",
         glue = "io/loop/step_definitions",
-        dryRun = true,
-        tags = "@test",
+        dryRun = false,
+        tags = "@google_search_data_table",
         monochrome = true
 )
 
