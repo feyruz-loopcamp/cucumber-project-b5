@@ -1,5 +1,6 @@
 package io.loop.step_definitions;
 
+import io.cucumber.java.an.E;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.loop.pages.POM;
@@ -49,7 +50,101 @@ public class ProductStepDefs {
         }
 
     }
+
+    @Then("User should be able to see expected prices in the following products with listOfLists")
+    public void user_should_be_able_to_see_expected_prices_in_the_following_products_with_list_of_lists(List<List<String>> productDetails) {
+
+        for (List<String> productDetail : productDetails) {
+
+            // category
+            pages.getProductPage().clickCategory(productDetail.get(0));
+
+            // get actual price for each product
+            String actualPrice = pages.getProductPage().getProductPrice(productDetail.get(1));
+
+            //  get expected price from feature file
+            String expectedPrice = productDetail.get(2);
+
+            // assertion
+            assertEquals("Expected does not match the actutal", expectedPrice, actualPrice);
+            LOG.info("Validation pf the price for: " + productDetail.get(0) + ", for product: " + productDetail.get(1) + " expected price: " + expectedPrice + " - actual price: " + actualPrice);
+            LOG.info("Validation pf the price for: " + productDetail.get(0) + ", for product: " + productDetail.get(1) + " expected price: {}, - actualPrice: {}", expectedPrice, actualPrice);
+
+        }
+
+    }
+
+    @Then("user should be able to see the names")
+    public void user_should_be_able_to_see_the_names(Map<String, List<String>> student) {
+        List<String> group2 = student.get("Group 2");
+        System.out.println("group2 = " + group2);
+    }
+
+    @Then("User should be able to see expected prices in the following products with map")
+    public void user_should_be_able_to_see_expected_prices_in_the_following_products_with_map(Map<String, List<String>> productDetails) {
+
+        for (Map.Entry<String, List<String>> entry : productDetails.entrySet()){
+            String category = entry.getKey();
+            List<String> products = entry.getValue();
+
+            for (String productPrice : products) {
+
+                try {
+                    String  [] arr1 = productPrice.split("-");
+                    String product = arr1[0].trim();
+                    String expectedPrice = arr1[1].trim();
+
+                    // category
+                    pages.getProductPage().clickCategory(category);
+
+                    // get actual price
+                    String actualPrice = pages.getProductPage().getProductPrice(product);
+
+
+                    // do assertion
+                    assertEquals("Expected does not match the actual", expectedPrice, actualPrice);
+                    LOG.info("Expected price {} - actual price {}", expectedPrice, actualPrice);
+                } catch (Exception e){
+
+                }
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
