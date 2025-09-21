@@ -1,12 +1,15 @@
 package io.loop.step_definitions;
 
 import io.cucumber.java.en.*;
+import io.cucumber.java.it.Ma;
 import io.loop.pages.HomePage;
 import io.loop.pages.LoginPage;
 import io.loop.utilities.BrowserUtils;
 import io.loop.utilities.ConfigurationReader;
 import io.loop.utilities.DocuportConstants;
 import io.loop.utilities.Driver;
+
+import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
@@ -85,4 +88,41 @@ public class LoginStepDefs {
 
     }
 
+    @When("user enters credentials")
+    public void user_enters_credentials(Map<String, String> credentials) throws InterruptedException {
+//        for (Map.Entry<String, String> entry : credentials.entrySet()){
+//            String key = entry.getKey();
+//            System.out.println("key = " + key);
+//
+//            String value = entry.getValue();
+//            System.out.println("value = " + value);
+//
+//            System.out.println("=======================");
+//        }
+
+        loginPage.login(credentials.get("username"), credentials.get("password"));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
