@@ -42,20 +42,27 @@ public class Driver {
             switch (browserType.toLowerCase()) {
                 case "chrome" -> {
                     options.addArguments("--disable-blink-features=AutomationControlled");
-                    options.addArguments("--disable-blink-features=AutomationControlled");
-                    options.addArguments("--disable-password-manager-reauthentication");
-                    options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
-                    options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
-                        put("credentials_enable_service", false);
-                        put("profile.password_manager_enabled", false);
-                        put("profile.password_manager_leak_detection", false);
-                        put("autofill.profile_enabled", false);
-                        put("autofill.credit_card_enabled", false);
-                    }});
+//                    options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
+//                        put("credentials_enable_service", false);
+//                        put("profile.password_manager_enabled", false);
+//                        put("profile.password_manager_leak_detection", false);
+//                        put("autofill.profile_enabled", false);
+//                        put("autofill.credit_card_enabled", false);
+//                        options.addArguments("--disable-blink-features=AutomationControlled");
+//                        options.addArguments("--disable-blink-features=AutomationControlled");
+//                        options.addArguments("--disable-password-manager-reauthentication");
+//                        options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
+//                    }});
                     driverPool.set(new ChromeDriver(options));
                 }
                 case "firefox" -> driverPool.set(new FirefoxDriver());
                 case "safari" -> driverPool.set(new SafariDriver());
+                case "headless" -> {
+                    options.addArguments("--disable-blink-features=AutomationControlled");
+                    options.addArguments("--headless");
+                    driverPool.set(new ChromeDriver(options));
+                }
+
             }
             driverPool.get().manage().window().maximize();
             driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
