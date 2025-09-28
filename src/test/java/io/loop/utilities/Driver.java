@@ -41,18 +41,16 @@ public class Driver {
             ChromeOptions options = new ChromeOptions();
             switch (browserType.toLowerCase()) {
                 case "chrome" -> {
-                    options.addArguments("--disable-blink-features=AutomationControlled");
-//                    options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
-//                        put("credentials_enable_service", false);
-//                        put("profile.password_manager_enabled", false);
-//                        put("profile.password_manager_leak_detection", false);
-//                        put("autofill.profile_enabled", false);
-//                        put("autofill.credit_card_enabled", false);
-//                        options.addArguments("--disable-blink-features=AutomationControlled");
-//                        options.addArguments("--disable-blink-features=AutomationControlled");
-//                        options.addArguments("--disable-password-manager-reauthentication");
-//                        options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
-//                    }});
+                    options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
+                        put("credentials_enable_service", false);
+                        put("profile.password_manager_enabled", false);
+                        put("profile.password_manager_leak_detection", false);
+                        put("autofill.profile_enabled", false);
+                        put("autofill.credit_card_enabled", false);
+                        options.addArguments("--disable-blink-features=AutomationControlled");
+                        options.addArguments("--disable-password-manager-reauthentication");
+                        options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
+                    }});
                     driverPool.set(new ChromeDriver(options));
                 }
                 case "firefox" -> driverPool.set(new FirefoxDriver());
