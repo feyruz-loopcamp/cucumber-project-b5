@@ -1,9 +1,16 @@
 package io.loop.step_definitions;
 
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.loop.pages.POM;
+import io.loop.utilities.BrowserUtils;
+import io.loop.utilities.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.awt.*;
 
 public class SampleDocuportStepDefs {
 
@@ -43,10 +50,28 @@ public class SampleDocuportStepDefs {
                 pages.getReceivedDocsPage().clickButton(button);
                 LOG.info(button + " - was successfully clicked - ");
             }
-            default -> throw new IllegalArgumentException("Not such a page" + page);
+
+            case "my uploads" -> {
+                pages.getMyUploadsPage().clickButton(button);
+                LOG.info(button + " - was successfully clicked - ");
+            }
+            default -> throw new IllegalArgumentException("Not such a page: " + page);
         }
 
 
     }
+
+    @Then("user uploads a document")
+    public void user_uploads_a_document() throws Exception {
+
+//        WebElement element = Driver.getDriver().findElement(By.xpath("//input[@type='file']"));
+//        element.sendKeys("/Users/nsh/Desktop/text.txt");
+
+        //BrowserUtils.uploadFileForWindows("/Users/nsh/Desktop/text.txt");
+        //BrowserUtils.uploadFileForMac("/Users/nsh/Desktop/text.txt");
+        BrowserUtils.uploadFileUsingAppleScript("/Users/nsh/Desktop/text.txt");
+
+    }
+
 
 }
