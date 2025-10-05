@@ -34,7 +34,7 @@ public class SampleDocuportStepDefs {
     }
 
     @When("user clicks {string} button on {string} page")
-    public void user_clicks_button_on_page(String button, String page) {
+    public void user_clicks_button_on_page(String button, String page) throws InterruptedException {
 
         switch (page.toLowerCase().trim()){
             case "login" , "choose account" -> {
@@ -55,6 +55,8 @@ public class SampleDocuportStepDefs {
                 pages.getMyUploadsPage().clickButton(button);
                 LOG.info(button + " - was successfully clicked - ");
             }
+
+
             default -> throw new IllegalArgumentException("Not such a page: " + page);
         }
 
